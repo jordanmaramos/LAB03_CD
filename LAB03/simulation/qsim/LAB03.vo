@@ -1,0 +1,169 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus II 64-Bit"
+// VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
+
+// DATE "10/13/2022 01:22:00"
+
+// 
+// Device: Altera EP3C5F256C6 Package FBGA256
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module LAB03 (
+	A0,
+	A1,
+	A2,
+	A3,
+	B0,
+	B1,
+	MUX_OUT);
+input 	A0;
+input 	A1;
+input 	A2;
+input 	A3;
+input 	B0;
+input 	B1;
+output 	MUX_OUT;
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+wire \MUX_OUT~output_o ;
+wire \A2~input_o ;
+wire \B0~input_o ;
+wire \A1~input_o ;
+wire \B1~input_o ;
+wire \A0~input_o ;
+wire \u3|D~0_combout ;
+wire \A3~input_o ;
+wire \u3|D~1_combout ;
+
+
+cycloneiii_io_obuf \MUX_OUT~output (
+	.i(\u3|D~1_combout ),
+	.oe(vcc),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\MUX_OUT~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \MUX_OUT~output .bus_hold = "false";
+defparam \MUX_OUT~output .open_drain_output = "false";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \A2~input (
+	.i(A2),
+	.ibar(gnd),
+	.o(\A2~input_o ));
+// synopsys translate_off
+defparam \A2~input .bus_hold = "false";
+defparam \A2~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \B0~input (
+	.i(B0),
+	.ibar(gnd),
+	.o(\B0~input_o ));
+// synopsys translate_off
+defparam \B0~input .bus_hold = "false";
+defparam \B0~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \A1~input (
+	.i(A1),
+	.ibar(gnd),
+	.o(\A1~input_o ));
+// synopsys translate_off
+defparam \A1~input .bus_hold = "false";
+defparam \A1~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \B1~input (
+	.i(B1),
+	.ibar(gnd),
+	.o(\B1~input_o ));
+// synopsys translate_off
+defparam \B1~input .bus_hold = "false";
+defparam \B1~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \A0~input (
+	.i(A0),
+	.ibar(gnd),
+	.o(\A0~input_o ));
+// synopsys translate_off
+defparam \A0~input .bus_hold = "false";
+defparam \A0~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_lcell_comb \u3|D~0 (
+// Equation(s):
+// \u3|D~0_combout  = (\B0~input_o  & (((\B1~input_o )))) # (!\B0~input_o  & ((\B1~input_o  & (\A1~input_o )) # (!\B1~input_o  & ((\A0~input_o )))))
+
+	.dataa(\B0~input_o ),
+	.datab(\A1~input_o ),
+	.datac(\B1~input_o ),
+	.datad(\A0~input_o ),
+	.cin(gnd),
+	.combout(\u3|D~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \u3|D~0 .lut_mask = 16'hE5E0;
+defparam \u3|D~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+cycloneiii_io_ibuf \A3~input (
+	.i(A3),
+	.ibar(gnd),
+	.o(\A3~input_o ));
+// synopsys translate_off
+defparam \A3~input .bus_hold = "false";
+defparam \A3~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cycloneiii_lcell_comb \u3|D~1 (
+// Equation(s):
+// \u3|D~1_combout  = (\B0~input_o  & ((\u3|D~0_combout  & ((\A3~input_o ))) # (!\u3|D~0_combout  & (\A2~input_o )))) # (!\B0~input_o  & (((\u3|D~0_combout ))))
+
+	.dataa(\A2~input_o ),
+	.datab(\B0~input_o ),
+	.datac(\u3|D~0_combout ),
+	.datad(\A3~input_o ),
+	.cin(gnd),
+	.combout(\u3|D~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \u3|D~1 .lut_mask = 16'hF838;
+defparam \u3|D~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+assign MUX_OUT = \MUX_OUT~output_o ;
+
+endmodule
